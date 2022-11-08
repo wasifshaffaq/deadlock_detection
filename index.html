@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Homepage</title>
+
+    <link rel="stylesheet" href="style.css">
+    <script defer src="app.js"></script>
+</head>
+<body>
+    <header style="background-color: black">
+        <h1 class="logo">DEADLOCK DETECTION & PREVENTION</h1>
+        <nav>
+            <ul class="nav__links">
+                <li><a href="#intro"><button style="margin-right: 10px;">Introduction</button></a></li>
+                <li><a href="#detect"><button style="margin-right: 10px;">Detection</button></a></li>
+                <li><a href="index2.html" target="_blank"><button style="margin-right: 30px;">Prevention</button></a></li>
+            </ul>
+        </nav>
+        <a class="cta" href="index2.html" target="_blank"><button style="margin-right: -30px;">About</button></a>
+    </header>
+
+    <section class="hidden">
+        <h1 style="font-size: 30px; font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif; color:aqua">Overview</h1>
+        <p style="font-size: 30px; font-family: Verdana, Geneva, Tahoma, sans-serif;">In this tutorial, we’ll explore how to prevent, avoid, detect, and ignore deadlock with practical examples</p>
+    </section>
+
+    <section class="hidden">
+        <h1 style="font-size: 30px; font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serifl; color:aqua; "id="intro">Introduction To Deadlock</h1>
+        <p style="font-size: 30px; text-align: center; font-family: Verdana, Geneva, Tahoma, sans-serif;">A deadlock can occur in almost any situation where processes share resources. It can happen in any computing environment, but it is widespread in distributed systems, where multiple processes operate on different resources.In this situation, one process may be waiting for a resource already held by another process. Deadlock is similar to a chicken and egg problem.<br> Let's see an example of deadlock</p>
+        <img src="1.png" class="imgone" style="border-color:aqua" alt="Deadlock">
+        <p style="font-size: 30px; text-align: center; font-family: Verdana, Geneva, Tahoma, sans-serif;">Suppose there are three processes, P1, P2, and P3, and three resources, R1, R2, and R3. Now, suppose P1 requests a resource R2, which is held by P2. In such a case, P1 won’t proceed without R2 and will wait indefinitely because P2 can’t release resource 2 until it gets R3, which P3 holds. The same is true for P1 and P3. Thus, it’s an ideal example of a deadlock situation in OS.</p>
+    </section>
+
+    <section class="hidden">
+        <h1 style="font-size: 30px; font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif; color:aqua;"> Necessary Conditions for Deadlock</h1>
+        <p style="font-size: 25px; text-align: center; font-family: Verdana, Geneva, Tahoma, sans-serif;">Deadlock can arise if the following four conditions hold simultaneously:<br>
+
+            <b style="color:aquamarine">The first condition is mutual exclusion.</b> In this condition, we can’t share a resource among the different processes at the same time.<br><br>
+            
+            For example, if two people want to print a paper simultaneously, this process can not be done. One has to wait until the system releases the print (resource). Thus, we can assign a resource to only one process at a time.<br><br>
+            
+            <b style="color:aquamarine">The second necessary condition for deadlock is the hold and wait or resource holding.</b> In this condition, a process simultaneously holds at least one resource and waits for another resource at a time. Here, the process is not in the running state. It’s in a waiting state.<br><br>
+            
+            <b style="color:aquamarine">The third condition is no preemption.</b> If a process holds a resource, then the resource can not be taken away forcefully from the process until it releases the resource. This statement also holds when the process is in a waiting state.<br><br>
+            
+            <b style="color:aquamarine">The final condition for deadlock is the circular wait.</b> Let’s assume the process P1 is waiting for a resource R2. Now that particular resource R2 is already held by a process P2. Process P2 is waiting for the resource, held by the next process. This will continue until the last process is waiting for the resource held by the first process.<br><br>
+            
+            The circular wait condition creates a circular chain and puts all the processes in a waiting state.</p>
+    </section><br><br><br><br><br><br>
+
+    
+    <section class="hidden">
+        <h1 style="font-size: 30px; font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif; color:aqua;" id="detect">Detection & Avoidance</h1>
+        <div class="row">
+            <div class="column">
+              <img src="5.png" alt="Snow" style="width:100%; border-radius: 15px;">
+            </div>
+            <div class="column">
+              <img src="6.png" alt="Forest" style=" height: 455px; width:100%; border-radius: 15px;">
+            </div>
+          </div>
+        
+        <p style="font-size: 20px; text-align: center; font-family: Verdana, Geneva, Tahoma, sans-serif;">In this method, the OS assumes that a deadlock will occur in the future. So <b style="color:aquamarine">it runs a deadlock detection mechanism with a certain interval of time, and when it detects the deadlock, it starts a recovery approach.</b> The main task of the OS is to detect the deadlock. There’re two methods of detection which we’ve already covered before.Here, we use the same methods with some improvisations:</p>
+
+        <p style="font-size: 20px; text-align: center; font-family: Verdana, Geneva, Tahoma, sans-serif;"><b style="color:aquamarine">In the wait-for graph method, the OS checks the formation of a circle.</b> It’s somehow the same as the resource allocation graph (RAG) with some differences. Mostly it causes confusion between the RAG and Wait-for graph.<br><b style="color:aquamarine">The main difference between a RAG and a wait-for graph is the number of vertices each graph contains.</b> A RAG graph has two vertices: resource and process. A wait-for graph has one vertex: process.<br>We can also create a wait-for graph using a RAG:</p><br> <br>
+
+        <img src="8.png" style="border-radius:15px"><br><br>
+
+        <p style="font-size: 20px; text-align: center; font-family: Verdana, Geneva, Tahoma, sans-serif;">The wait-for graph is not making a circle, which means it’ll not lead the system to a deadlock.<br><b style="color:aquamarine">For multiple instance resources, we use the Safety algorithm, which uses the same approach as the Banker’s algorithm.</b> But it doesn’t have a maximum required resource matrix. It has only three matrices: allocated, available, and current requirement matrix.<br>Now, as soon as the OS detects a deadlock, it’ll start the recovery method.<b style="color:aquamarine">There are two main approaches to recover from a deadlock:</b></p>
+
+        <br>
+        <br>
+
+
+
+    </section>
+
+    
+    <section class="hidden">
+        <a href="index2.html" target="_blank"><button style="font-size: 40px; border-radius:12px; color:black"> Next Page</button></a>
+        <p><i style="color:antiquewhite; margin-left: 24px;">See More about Prevention</i></p>
+    </section>
+
+    
+    
+</body>
+</html>

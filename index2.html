@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page 1</title>
+
+    <link rel="stylesheet" href="style2.css">
+    <script defer src="app.js"></script>
+</head>
+<body>
+    <header style="background-color: black">
+        <h1 class="logo" style="color:aliceblue">DEADLOCK DETECTION & PREVENTION</h1>
+        <nav>
+            <ul class="nav__links">
+                <li><a href="#prev"><button style="margin-right: 30px;">Prevention</button></a></li>
+            </ul>
+        </nav>
+        <a class="cta" href="#abu"><button style="margin-right: -30px;">About</button></a>
+    </header>
+
+    <section class="hidden">
+        <h1 style="font-size: 30px; font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif; color:aqua" >Prevention</h1>
+        <p style="font-size: 25px; text-align: center; font-family: Verdana, Geneva, Tahoma, sans-serif; color:white">In the deadlock prevention process, the OS will prevent the deadlock from occurring by avoiding any one of the four conditions that caused the deadlock. If the OS can avoid any of the necessary conditions, a deadlock will not occur</p>
+    </section>
+
+    <section class="hidden">
+        <h1 style="font-size: 30px; font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif; color:aqua" id="prev">No Mutual Exclusion</h1>
+        <p style="font-size: 25px; text-align: center; font-family: Verdana, Geneva, Tahoma, sans-serif; color:white"><b>It means more than one process can have access to a single resource at the same time.</b> It’s impossible because if multiple processes access the same resource simultaneously, there will be chaos. Additionally, no process will be completed. So this is not feasible. Hence, the OS can’t avoid mutual exclusion. Let’s take a practical example to understand this issue. Jack and Jones share a bowl of soup. Both of them want to drink the soup from the same bowl and use a single spoon simultaneously, which is not feasible.</p>
+        <img src="mutual.png" style="border-radius:15px; height: 500px; width: 700px"><br><br><br>
+    </section>
+
+    <section class="hidden">
+        <h1 style="font-size: 30px; font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif; color:aqua"
+        >No Hold and Wait</h1>
+        <p style="font-size: 25px; text-align: center; font-family: Verdana, Geneva, Tahoma, sans-serif; color:white; padding: 5px;">To avoid the hold and wait, <b>there are many ways to acquire all the required resources before starting the execution.</b> But this is also not feasible because a process will use a single resource at a time. Here, the resource utilization will be very less. Before starting the execution, the process does not know how many resources would be required to complete it. In addition to that, the bus time, in which a process will complete and free the resource, is also unknown. <b>Another way is if a process is holding a resource and wants to have additional resources, then it must free the acquired resources. This way, we can avoid the hold and wait condition, but it can result in starvation.</b></p>
+        <img src="hold and wait.png" style="border-radius:15px; height: 500px; width: 700px"> <br><br><br>
+    </section>
+
+    <section class="hidden">
+        <h1 style="font-size: 30px; font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif; color:aqua" >Removal of No Preemption</h1>
+        <p style="font-size: 25px; text-align: center; font-family: Verdana, Geneva, Tahoma, sans-serif; color:white; padding: 5px;">One of the reasons that cause the deadlock is the no preemption.<b>It means the CPU can’t take acquired resources from any process forcefully even though that process is in a waiting state.</b> If we can remove the no preemption and forcefully take resources from a waiting process, we can avoid the deadlock. This is an implementable logic to avoid deadlock. For example, it’s like taking the bowl from Jones and give it to Jack when he comes to have soup. Let’s assume Jones came first and acquired a resource and went into the waiting state. Now when Jack came, the caterer took the bowl from Jones forcefully and told him not to hold the bowl if you are in a waiting state.</p><br>
+        <img src="preemption.png" style="border-radius:15px; height: 500px; width: 700px;"><br><br><br>
+    </section>
+
+    <section class="hidden">
+        <h1 style="font-size: 30px; font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif; color:aqua" >Removal of Circular Wait</h1>
+        <p style="font-size: 25px; text-align: center; font-family: Verdana, Geneva, Tahoma, sans-serif; color:white; padding: 5px;"><b>In the circular wait, two processes are stuck in the waiting state for the resources which have been held by each other.</b> To avoid the circular wait, we assign a numerical integer value to all resources, and a process has to access the resource in increasing or decreasing order. If the process acquires resources in increasing order, it’ll only have access to the new additional resource if that resource has a higher integer value. And if that resource has a lesser integer value, it must free the acquired resource before taking the new resource and vice-versa for decreasing order. For example, the caterer assigned an integer value to the bowl and the spoon as 1 and 2, respectively, so that one can have access to the resource in increasing order. Now, if Jones has a bowl, then he can have the spoon. But as Jack has a spoon with a greater integer value, he must leave the spoon first and then take the bowl. Thereafter, he will get the spoon to have the soup.</p> <br><br>
+        <img src="circular waitman.png" style="border-radius:15px; height: 500px; width: 700px"><br> <br><br>
+    </section>
+
+    <section class="hidden">
+        <h1 style="font-size: 30px; font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif; color:aqua" >See Videos on Deadlock & Deadlock Detection</h1>
+        <p style="font-size: 25px; text-align: center; font-family: Verdana, Geneva, Tahoma, sans-serif; color:white">To get more insight on what deadlock is, banker's alogrithm & what questions might come in competitive exams please scroll through the catalog </p>
+        <a href="index3.html" target="_blank"><button style="font-size: 40px; border-radius:12px; color:black"> See Videos</button></a>
+    </section>
+
+
+
+
+    <section class="footer" style="background-color:black;">
+
+        <div class="box-container">
+    
+            <div class="box">
+                <h3 style="color:aquamarine;" id="abu"></i> About </h3>
+                <p>Hopefully you've learned what is deadlock & the condition it needs to occur & also how to prevent it</p>
+
+            </div>
+    
+            <div class="box">
+                <h3 style="color:aquamarine">Get in Touch</h3>
+                <a href="#" class="links"> wasifshaffaq009@gmail.com </a>
+                <a href="#" class="links"> </i> Srinagar, india - 190011 </a>
+            </div>
+    
+            
+    
+        </div>
+        
+        <center><div class="credit"> Created by <span style="color:aquamarine"> Wasif Shaffaq </span></div></center>
+        
+    
+    </section>
+
+<div class="action" onclick="prevpage()">   
+<span> < </span>
+</div>
+
+</body>
+</html>

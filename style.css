@@ -1,0 +1,110 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap');
+
+*{
+    font-family: 'Poppins', sans-serif;
+    }
+
+body{
+    /* background-color: #131316; */
+    color: #ffffff;
+    font-family: 'Poppins', sans-serif;
+    padding: 0;
+    margin: 0;
+}
+
+
+html { 
+    background: url(sky.jpg) no-repeat center center fixed; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+  }
+
+
+
+
+section {
+    display: grid;
+    place-items: center;
+    align-content: center;
+    min-height: 50vh;
+
+}
+
+header {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 30px 10%;
+
+}
+
+.logo {
+    cursor: pointer;
+    margin-right: auto;
+}
+
+.nav__links {
+    list-style: none;
+}
+
+.nav__links li {
+    display: inline-block;
+    padding: 0px 20px;
+}
+
+.nav__links li a {
+    transition: all 0.3s ease 0s;
+}
+
+.nav__links li a:hover {
+    color: #0088a9; 
+}
+
+button {
+    margin-left: 30px;
+    padding: 9px 25px;
+    background-color:aquamarine;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease 0s;
+
+}
+
+button:hover {
+    background-color: white;
+    color: rgba(0,136,169,1);
+}
+
+.hidden {
+    opacity: 0;
+    filter: blur(5px);
+    transform: translateX(-100%);
+    transition: all 1s;
+}
+
+.show {
+    opacity: 1;
+    filter: blur(0);
+    transform: translatex(0);
+}
+
+.imgone {
+    border-radius: 15px;
+}
+
+
+
+
+.row {
+    display: flex;
+  }
+  
+  /* Create three equal columns that sits next to each other */
+  .column {
+    flex: 33.33%;
+    padding: 40px;
+  }
+
