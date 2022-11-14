@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz</title>
+
+    <script type="text/javascript" src="google-chart-loader.js">
+
+    </script>
+
+    <style>
+
+        body{
+            margin: 0;
+            padding: 0;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            color: #fff;
+            
+            background: #111;
+        }
+
+        #nav{
+            background: #111;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            padding: 25px;
+            align-items: center;
+            color: #fff;
+            font-family: roboto;
+            border-bottom: 1px solid #222;
+        }
+
+        #main{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        #quiz{
+            width: 62vw;
+            margin-top: 50px;
+        }
+
+        #quizResult{
+            width: 62vw;
+            margin-top: 50px;
+        }
+
+
+        #options{
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .option{
+            padding: 15px 27px;
+            border-radius: 15px;
+            text-align: left;
+            cursor: pointer;
+            background: rgba(255,255,255,0.9);
+        }
+
+        #congratulation{
+            text-align: center;
+            font-weight: 900;
+            color: #039be5;
+            font-size: 30px;
+        }
+
+        div{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+
+        #resTitle{
+            text-align: center;
+            font-weight: 900;
+            color: #fff;
+            font-size: 30px;
+
+            margin-bottom: 25px;
+        }
+
+
+        text {
+            fill: #fff;
+        }
+
+        svg{
+            overflow: hidden;
+            border: 1px solid #333;
+            border-radius: 15px;
+        }
+
+        rect {
+            fill: #111;
+        }
+
+
+        #warning{
+            text-align: center;
+            font-weight: 900;
+            color: tomato;
+            font-size: 30px;
+        }
+
+        #nextQuestion{
+            display: block;
+            margin-top: 50px;
+            border-radius: 50px;
+            font-weight: 700;
+            padding: 11px 25px;
+        }
+
+        #buttons{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        button{
+            cursor: pointer;
+            transition: 0.25s ease-in-out all;
+        }
+
+        button:hover{
+            transform: scale(0.95);
+        }
+    </style>
+</head>
+
+    <div id="nav">
+        <h2 id="title"> Deadlock Quiz </h2>
+
+        <div id="links"> 
+            <div class="link">Home</div>    
+        </div>
+    </div>
+
+    <div id="main">
+
+
+        <div id="quiz">
+            <div id="warning"></div>
+            <div id="congratulation"></div>
+
+            <div id="questionArea">
+                <h2 id="question">  </h2>
+                <div id="options">
+            </div>
+
+
+            </div>
+
+            <div id="buttons">
+                <button id="nextQuestion" onClick="nextQuestion()">Next</button>
+            </div>
+        </div>
+
+        <div id="quizResult">
+            <div id="resTitle"></div>
+            <div id="resChart"></div>
+        </div>
+
+    </div>
+
+
+    
+</body>
+
+<script>
+
+google.charts.load('current', {'packages':['corechart']});
+google.charts.setOnLoadCallback(console.log);
+
+    let questions = [
+        {
+            question:" What is a reusable resource?", 
+            options:[
+                "That can be used by one process at a time and is not depleted by that use",
+                "That can be used by more than one process at a time",
+                "That can be shared between various threads",
+                "None of the mentioned"], 
+            answerIndex:0
+        },
+        {
+            question:"Which of the following condition is required for a deadlock to be possible?", 
+            options:[
+                
+                "A process may hold allocated resources while awaiting assignment of other resources",
+                "No resource can be forcibly removed from a process holding it",
+                "All of the mentioned",
+                "Mutual exclusion"], 
+            answerIndex:1
+        },
+        {
+            question:"A system is in the safe state if ____________", 
+            options:[
+                "The system can allocate resources to each process in some order and still avoid a deadlock",
+                "There exist a safe sequence",
+                "None of the mentioned",
+                "All of the mentioned",
+                ], 
+            answerIndex:0
+        }
+    ]
+
+    let currentIndex = -1
+    let correctAnswers = 0
+
+    nextQuestion()
+    
+    function nextQuestion(){
+        currentIndex++
+
+        if(currentIndex > questions.length-1 ){
+            return showResult()
+        }
+
+        let ques = questions[currentIndex]
+
+        document.querySelector("#question").innerText = ques.question
+
+
+        let options= ``
+
+        let i = 0
+        for(let item of ques.options){
+            options += ` <button class="option" onClick="checkAnswer(${i})">
+                    ${item}
+                </button> `
+            i++
+        }
+
+        document.querySelector("#options").innerHTML = options
+
+
+        document.querySelector("#nextQuestion").style.display = "none"
+        document.querySelector("#congratulation").innerText = ""
+        document.querySelector("#warning").innerText = ""
+        document.querySelector("#questionArea").style.display = "block"
+    }
+
+    function showResult(){
+        document.querySelector("#quiz").style.display = "none"
+
+        document.querySelector("#resTitle").innerText = `You got ${Math.round((correctAnswers/questions.length) * 100)}%`
+    
+    
+        var data = google.visualization.arrayToDataTable([
+                ['Type', 'Right or Wrong'],
+                ['Correct', correctAnswers],
+                ['Wrong', (questions.length - correctAnswers)],
+     
+                ]);
+
+        // Optional; add a title and set the width and height of the chart
+        var options = {'title':'Result', 'width':550, 'height':400};
+
+        // Display the chart inside the <div> element with id="piechart"
+        var chart = new google.visualization.PieChart(document.getElementById('resChart'));
+        chart.draw(data, options);
+    
+    }
+
+    function checkAnswer(selectedIndex){
+        document.querySelector("#nextQuestion").style.display = "block"
+        document.querySelector("#questionArea").style.display = "none"
+
+        let isCorrect = questions[currentIndex].answerIndex == selectedIndex
+
+        if(isCorrect){
+            correctAnswers++
+            document.querySelector("#congratulation").innerText = "Congrats! Right Anwer!"
+        }else{
+            document.querySelector("#warning").innerText = "Wrong Anwer"
+        }
+    }
+
+    
+
+
+</script>
+
+</html>

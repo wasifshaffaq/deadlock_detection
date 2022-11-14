@@ -47,23 +47,20 @@ header {
 
 .nav__links {
     list-style: none;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    gap:15px;
 }
 
-.nav__links li {
-    display: inline-block;
-    padding: 0px 20px;
-}
 
-.nav__links li a {
-    transition: all 0.3s ease 0s;
-}
 
-.nav__links li a:hover {
+.nav__links a:hover {
     color: #0088a9; 
 }
 
 button {
-    margin-left: 30px;
+    margin-left: 0;
     padding: 9px 25px;
     background-color:aquamarine;
     border: none;
